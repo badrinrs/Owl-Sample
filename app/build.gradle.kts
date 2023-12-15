@@ -17,6 +17,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.keeper)
 }
 
 android {
@@ -51,10 +52,12 @@ android {
 
         getByName("release") {
             isMinifyEnabled = true
+            isShrinkResources = true
             signingConfig = signingConfigs.getByName("debug")
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"),
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"),
                     "proguard-rules.pro")
             testProguardFile("test_proguard_rules.pro")
+            keeper.automaticR8RepoManagement = true
         }
     }
 
